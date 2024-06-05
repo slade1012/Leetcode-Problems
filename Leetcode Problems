@@ -16,6 +16,28 @@ class Solution(object):
             if nums[i] in d and i!=d[nums[i]]:
                 return [i,d[nums[i]]]
 
+Given an integer x, return true if x is a 
+palindrome
+, and false otherwise.
+
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        if x<0:
+            return False
+        lst=[]
+        while x!=0:
+            digit=x%10
+            lst.append(digit)
+            x=x//10
+        if lst==list(reversed(lst)):
+            return True
+        else:
+            return False
+
 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
 Symbol       Value
