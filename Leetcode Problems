@@ -1,0 +1,261 @@
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        d={target-n:i for i,n in enumerate(nums)}
+        for i in range(0,len(nums)-1):
+            if nums[i] in d and i!=d[nums[i]]:
+                return [i,d[nums[i]]]
+
+Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+I can be placed before V (5) and X (10) to make 4 and 9. 
+X can be placed before L (50) and C (100) to make 40 and 90. 
+C can be placed before D (500) and M (1000) to make 400 and 900.
+Given a roman numeral, convert it to an integer.
+
+class Solution(object):
+
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        def string_sub(s, symbol):
+            if s.endswith(symbol):
+                return s[:-(len(symbol))]
+            return s
+        ans=0
+        string=''
+        value=[1,4,5,9,10,40,50,90,100,400,500,900,1000]
+        three_symbol_nums = {
+            "III": 3, "XXX": 30, ...
+        }
+        two_symbol_nums = {
+            ...
+        }
+        one_sym
+
+
+        symbol=['I','IV','V','IX','X','XL','L','XC','C','CD','D','CM','M']
+        d={symbol[i]:value[i] for i in range(len(symbol))}
+        for element in symbol:
+            for i in [3, 2, 1]:
+                print(element*i, s, ans)
+                if s.endswith(element*i):
+                    ans+=d[element]*i
+                    s=string_sub(s,element*i)
+        return ans
+
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        ans=''
+        i=0
+        if len(strs)>1:
+            while i<min([len(element) for element in strs]):
+                print(i)
+                lst=[]
+                j=0
+                for string in strs:
+                    if string!='':
+                        lst.append(string[i])
+                    else:
+                        return ''
+                while j+1 <len(lst):
+                    print(j)
+                    if lst[j]==lst[j+1]:
+                        j+=1
+                    else:
+                        return ans
+                if j==len(lst)-1:
+                    ans+=lst[j]
+                i+=1
+            return ans
+        else:
+            return strs[0]
+
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        lst1=[]
+        lst2=[]
+        lst3=[]
+        lst4=[]
+        lst5=[]
+        lst6=[]
+        if len(s)==1:
+            return False
+        if s[0]==')':
+            return False
+        if s[0]==']':
+            return False
+        if s[0]=='}':
+            return False
+        if '(' in s:
+            if ')' not in s:
+                return False
+        if ')' in s:
+            if '(' not in s:
+                return False
+        if '{' not in s:
+            for i in range(len(s)):
+                if s[i]=='[':
+                    lst1.append(i)
+                if s[i]=='(':
+                    lst2.append(i)
+                if s[i]==']':
+                    lst3.append(i)
+                if s[i]==')':
+                    lst4.append(i)
+            if lst1!=[]:
+                if lst2!=[]:
+                    if lst3!=[]:
+                        if lst4!=[]:
+                            if lst1[0]<lst2[0]:
+                                if lst3[0]<lst4[0]:
+                                    return False
+                            if lst2[0]<lst1[0]:
+                                if lst4[0]<lst3[0]:
+                                    return False
+        if '(' not in s:
+            for i in range(len(s)):
+                if s[i]=='[':
+                    lst1.append(i)
+                if s[i]=='{':
+                    lst2.append(i)
+                if s[i]==']':
+                    lst3.append(i)
+                if s[i]=='}':
+                    lst4.append(i)
+            if lst1!=[]:
+                if lst2!=[]:
+                    if lst3!=[]:
+                        if lst4!=[]:
+                            if lst1[0]<lst3[0]<lst2[0]<lst4[0]:
+                                return True
+                            if lst1[0]<lst2[0]:
+                                if lst3[0]<lst4[0]:
+                                    return False
+                            if lst2[0]<lst1[0]:
+                                if lst4[0]<lst3[0]:
+                                    return False
+        for i in range(len(s)):
+                if s[i]=='[':
+                    lst1.append(i)
+                if s[i]=='{':
+                    lst2.append(i)
+                if s[i]==']':
+                    lst3.append(i)
+                if s[i]=='}':
+                    lst4.append(i)
+                if s[i]=='(':
+                    lst5.append(i)
+                if s[i]==')':
+                    lst6.append(i)
+                if lst1!=[]:
+                    if lst2!=[]:
+                        if lst3!=[]:
+                            if lst4!=[]:
+                                if lst5!=[]:
+                                    if lst6!=[]:
+                                        if lst1[0]<lst3[0]<lst5[0]<lst6[0]<lst2[0]<lst4[0]:
+                                            return True
+                                        if lst1[0]<lst5[0]<lst2[0]:
+                                            if lst3[0]<lst6[0]<lst4[0]:
+                                                return False
+        if '{' in s:
+            if '}' not in s:
+                return False
+        if '}' in s:
+            if '{' not in s:
+                return False
+        if '[' in s:
+            if ']' not in s:
+                return False
+        if ']' in s:
+            if '[' not in s:
+                return False
+        if '(' in s:
+            s=s.replace(')','',1)
+            s=s.replace('(','',1)
+            if '(' in s:
+                if ')' not in s:
+                    return False
+            if ')' in s:
+                if '(' not in s:
+                    return False
+        while '[' in s:
+            s=s.replace(']','',1)
+            s=s.replace('[','',1)
+            if '[' in s:
+                if ']' not in s:
+                    return False
+            if ']' in s:
+                if '[' not in s:
+                    return False
+        for i in range(len(s)-1):
+            if s[i]=='(':
+                if s[i+1]!=')':
+                    if s[i+1]!='[':
+                        if s[i+1]!='{':
+                            if s[i+1]!='(':
+                                return False
+            if s[i]=='[':
+                if s[i+1]!=']':
+                    if s[i+1]!='(':
+                        if s[i+1]!='{':
+                            if s[i+1]!='[':
+                                return False
+            if s[i]=='{':
+                if s[i+1]!='}':
+                    if s[i+1]!='[':
+                        if s[i+1]!='(':
+                            if s[i+1]!='{':
+                                return False
+            if s[len(s)-1]=='(':
+                return False
+            if s[len(s)-1]=='[':
+                return False
+            if s[len(s)-1]=='{':
+                return False
+        return True
