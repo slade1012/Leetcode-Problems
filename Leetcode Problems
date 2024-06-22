@@ -139,148 +139,14 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        lst1=[]
-        lst2=[]
-        lst3=[]
-        lst4=[]
-        lst5=[]
-        lst6=[]
-        if len(s)==1:
+        if s == '':
+            return True
+        if len(s) % 2 != 0:
             return False
-        if s[0]==')':
+        new_str = s.replace('()', '').replace('[]', '').replace('{}', '')
+        if new_str == s:
             return False
-        if s[0]==']':
-            return False
-        if s[0]=='}':
-            return False
-        if '(' in s:
-            if ')' not in s:
-                return False
-        if ')' in s:
-            if '(' not in s:
-                return False
-        if '{' not in s:
-            for i in range(len(s)):
-                if s[i]=='[':
-                    lst1.append(i)
-                if s[i]=='(':
-                    lst2.append(i)
-                if s[i]==']':
-                    lst3.append(i)
-                if s[i]==')':
-                    lst4.append(i)
-            if lst1!=[]:
-                if lst2!=[]:
-                    if lst3!=[]:
-                        if lst4!=[]:
-                            if lst1[0]<lst2[0]:
-                                if lst3[0]<lst4[0]:
-                                    return False
-                            if lst2[0]<lst1[0]:
-                                if lst4[0]<lst3[0]:
-                                    return False
-        if '(' not in s:
-            for i in range(len(s)):
-                if s[i]=='[':
-                    lst1.append(i)
-                if s[i]=='{':
-                    lst2.append(i)
-                if s[i]==']':
-                    lst3.append(i)
-                if s[i]=='}':
-                    lst4.append(i)
-            if lst1!=[]:
-                if lst2!=[]:
-                    if lst3!=[]:
-                        if lst4!=[]:
-                            if lst1[0]<lst3[0]<lst2[0]<lst4[0]:
-                                return True
-                            if lst1[0]<lst2[0]:
-                                if lst3[0]<lst4[0]:
-                                    return False
-                            if lst2[0]<lst1[0]:
-                                if lst4[0]<lst3[0]:
-                                    return False
-        for i in range(len(s)):
-                if s[i]=='[':
-                    lst1.append(i)
-                if s[i]=='{':
-                    lst2.append(i)
-                if s[i]==']':
-                    lst3.append(i)
-                if s[i]=='}':
-                    lst4.append(i)
-                if s[i]=='(':
-                    lst5.append(i)
-                if s[i]==')':
-                    lst6.append(i)
-                if lst1!=[]:
-                    if lst2!=[]:
-                        if lst3!=[]:
-                            if lst4!=[]:
-                                if lst5!=[]:
-                                    if lst6!=[]:
-                                        if lst1[0]<lst3[0]<lst5[0]<lst6[0]<lst2[0]<lst4[0]:
-                                            return True
-                                        if lst1[0]<lst5[0]<lst2[0]:
-                                            if lst3[0]<lst6[0]<lst4[0]:
-                                                return False
-        if '{' in s:
-            if '}' not in s:
-                return False
-        if '}' in s:
-            if '{' not in s:
-                return False
-        if '[' in s:
-            if ']' not in s:
-                return False
-        if ']' in s:
-            if '[' not in s:
-                return False
-        if '(' in s:
-            s=s.replace(')','',1)
-            s=s.replace('(','',1)
-            if '(' in s:
-                if ')' not in s:
-                    return False
-            if ')' in s:
-                if '(' not in s:
-                    return False
-        while '[' in s:
-            s=s.replace(']','',1)
-            s=s.replace('[','',1)
-            if '[' in s:
-                if ']' not in s:
-                    return False
-            if ']' in s:
-                if '[' not in s:
-                    return False
-        for i in range(len(s)-1):
-            if s[i]=='(':
-                if s[i+1]!=')':
-                    if s[i+1]!='[':
-                        if s[i+1]!='{':
-                            if s[i+1]!='(':
-                                return False
-            if s[i]=='[':
-                if s[i+1]!=']':
-                    if s[i+1]!='(':
-                        if s[i+1]!='{':
-                            if s[i+1]!='[':
-                                return False
-            if s[i]=='{':
-                if s[i+1]!='}':
-                    if s[i+1]!='[':
-                        if s[i+1]!='(':
-                            if s[i+1]!='{':
-                                return False
-            if s[len(s)-1]=='(':
-                return False
-            if s[len(s)-1]=='[':
-                return False
-            if s[len(s)-1]=='{':
-                return False
-        return True
+        return self.isValid(new_str)
 
 You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
 
@@ -548,3 +414,106 @@ class Solution(object):
         for i in range(len(string)):
             lst.append(int(string[i]))
         return lst
+
+Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.
+
+class Solution(object):
+    def countPairs(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        count = 0
+        nums = sorted(nums)
+        for i in range(len(nums) - 1):
+            rest = nums[i+1:]
+            middle_index = len(rest) // 2
+            while len(rest) != 0:
+                if nums[i] + rest[middle_index] >= target: 
+                    rest = rest[:middle_index]
+                    middle_index = len(rest) // 2
+                else:
+                    count += middle_index + 1
+                    rest = rest[middle_index + 1:] 
+                    middle_index = len(rest) // 2
+        return count
+
+Given a m x n matrix grid which is sorted in non-increasing order both row-wise and column-wise, return the number of negative numbers in grid.
+
+class Solution(object):
+    def countNegatives(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        lst = []
+        m = len(grid)
+        n = len(grid[0])
+        i = m - 1
+        j = 0
+        count = 0
+        while i >= 0 and j < n:
+            if grid[i][j] >= 0:
+                j += 1
+            else:
+                count += n - j
+                i -= 1
+        return count
+
+You are given a 0-indexed integer array nums and a target element target.
+
+A target index is an index i such that nums[i] == target.
+
+Return a list of the target indices of nums after sorting nums in non-decreasing order. If there are no target indices, return an empty list. The returned list must be sorted in increasing order.
+
+class Solution(object):
+    def targetIndices(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        nums = sorted(nums)
+        return sorted(self.helper(nums, target, 0))
+
+    def helper(self, nums, target, start_index):
+        if len(nums) == 0:
+            return []
+        middle_index = len(nums) // 2
+        if nums[middle_index] == target:
+            return [middle_index + start_index] + self.helper(nums[:middle_index], target, start_index) + self.helper(nums[middle_index + 1:], target, start_index + middle_index + 1)
+        if nums[middle_index] > target:
+            return self.helper(nums[:middle_index], target, start_index)
+        if nums[middle_index] < target:
+            return self.helper(nums[middle_index + 1:], target, start_index + middle_index + 1)
+
+Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.
+
+You must not use any built-in exponent function or operator.
+
+For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
+
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+
+        return self.helper(x, 0, x)
+
+    def helper(self, upper, lower, x):
+        mid_point = upper - (upper - lower) // 2
+        if mid_point * mid_point < x:
+            if (mid_point + 1) * (mid_point + 1) > x:
+                return mid_point
+            lower = mid_point
+            return self.helper(upper, lower, x)
+        if mid_point * mid_point == x:
+            return mid_point
+        if mid_point * mid_point > x:
+            if (mid_point - 1) * (mid_point - 1) < x:
+                return mid_point - 1
+            upper = mid_point
+            return self.helper(upper, lower, x)
