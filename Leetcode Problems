@@ -414,3 +414,50 @@ class Solution(object):
                 return mid_point - 1
             upper = mid_point
             return self.helper(upper, lower, x)
+
+Given two binary strings a and b, return their sum as a binary string.
+
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        int_a = int(a)
+        int_b = int(b)
+        res = int_a + int_b
+        count = 0
+        coefficient = 10 ** count
+        divisor = 10 
+        ans = 2
+        digit = len(str(res))
+        while count <= digit:
+            print(res)
+            if str(res % divisor).startswith('6'):
+                res -= 5 * coefficient
+                if count < digit:
+                    res += 2 * coefficient * 10
+            if str(res % divisor).startswith('5'):
+                res -= 4 * coefficient
+                if count < digit:
+                    res += 2 * coefficient * 10
+            if str(res % divisor).startswith('4'):
+                res -= 3 * coefficient
+                if count < digit:
+                    res +=  coefficient * 10
+            if str(res % divisor).startswith('3'):
+                res -= 2 * coefficient
+                if count < digit:
+                    res += coefficient * 10
+            if str(res % divisor).startswith('2'):
+                res += 8 * coefficient
+                count += 1
+                coefficient = 10 ** count
+                divisor *= 10
+            else:    
+                count += 1
+                coefficient = 10 ** count
+                divisor *= 10
+        res = str(res)
+        return res
