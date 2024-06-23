@@ -489,3 +489,21 @@ class Solution(object):
                 cur.next = None
             head = head.next
         return res
+
+Given two integer arrays nums1 and nums2, return an array of their 
+intersection
+. Each element in the result must be unique and you may return the result in any order.
+
+class Solution(object):
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        lst = []
+        for element in nums1:
+            if element in nums2:
+                if element not in lst:
+                    lst.append(element)
+        return lst
