@@ -562,3 +562,70 @@ class Solution(object):
             counts.append((i, count))
         counts = sorted(counts, key=lambda x: (x[1], x[0]))
         return [i for i, _ in counts[:k]]
+
+You are given an integer array nums of length n, and an integer array queries of length m.
+
+Return an array answer of length m where answer[i] is the maximum size of a subsequence that you can take from nums such that the sum of its elements is less than or equal to queries[i].
+
+A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.
+
+class Solution(object):
+    def answerQueries(self, nums, queries):
+        """
+        :type nums: List[int]
+        :type queries: List[int]
+        :rtype: List[int]
+        """
+        m = len(nums)
+        n = len(queries)
+        lst = []
+        nums = sorted(nums) O(mlogm)
+        for query in queries: O(n)
+            lst += [self.helper(nums, len(nums) - 1, 0, query)] O(logm)
+        return lst
+
+    def helper(self, nums, upper, lower, query):
+            middle_index = (upper + lower) // 2
+            if upper < lower:
+                return middle_index + 1
+            if sum(nums[:middle_index + 1]) > query:
+                return self.helper(nums, middle_index - 1, lower, query)
+            elif sum(nums[:middle_index + 1]) == query:
+                return middle_index + 1
+            else:
+                return self.helper(nums, upper, middle_index + 1, query)
+
+Given an array nums sorted in non-decreasing order, return the maximum between the number of positive integers and the number of negative integers.
+
+In other words, if the number of positive integers in nums is pos and the number of negative integers is neg, then return the maximum of pos and neg.
+Note that 0 is neither positive nor negative.
+
+class Solution(object):
+    def maximumCount(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        pos_index = self.find_smallest_positive_index(len(nums) - 1, 0, nums)
+        pos = len(nums) - pos_index
+        neg = self.find_largest_negative_index(len(nums[:pos_index]) - 1, 0, nums[:pos_index])
+        return pos if pos > neg else neg
+
+        
+    def find_smallest_positive_index(self, upper, lower, nums):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return middle_index + 1
+        if nums[middle_index] > 0:
+            return self.find_smallest_positive_index(middle_index - 1, lower, nums)
+        else:
+            return self.find_smallest_positive_index(upper, middle_index + 1, nums)
+
+    def find_largest_negative_index(self, upper, lower, nums):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return middle_index + 1
+        if nums[middle_index] >= 0:
+            return self.find_largest_negative_index(middle_index - 1, lower, nums)
+        else:
+            return self.find_largest_negative_index(upper, middle_index + 1, nums)
