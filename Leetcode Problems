@@ -629,3 +629,34 @@ class Solution(object):
             return self.find_largest_negative_index(middle_index - 1, lower, nums)
         else:
             return self.find_largest_negative_index(upper, middle_index + 1, nums)
+
+Given two integer arrays arr1 and arr2, and the integer d, return the distance value between the two arrays.
+
+The distance value is defined as the number of elements arr1[i] such that there is not any element arr2[j] where |arr1[i]-arr2[j]| <= d.
+
+class Solution(object):
+    def findTheDistanceValue(self, arr1, arr2, d):
+        """
+        :type arr1: List[int]
+        :type arr2: List[int]
+        :type d: int
+        :rtype: int
+        """
+        res = 0
+        arr2 = sorted(arr2)
+        for arr1_elem in arr1:
+            res += self.find_closest_element(arr1_elem, arr2, len(arr2) - 1, 0, d)
+        return res
+                
+    def find_closest_element(self, arr1_elem, arr2, upper, lower, d):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return 1
+        if abs(arr1_elem - arr2[middle_index]) <= d:
+            return 0
+        if arr1_elem - arr2[middle_index] > 0:
+            return self.find_closest_element(arr1_elem, arr2, upper, middle_index + 1, d)
+        elif arr1_elem - arr2[middle_index] < 0:
+            return self.find_closest_element(arr1_elem, arr2, middle_index - 1, lower, d)
+        else:
+            return 0
