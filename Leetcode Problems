@@ -660,3 +660,22 @@ class Solution(object):
             return self.find_closest_element(arr1_elem, arr2, middle_index - 1, lower, d)
         else:
             return 0
+
+Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums = sorted(nums)
+        if nums[0] != 0:
+            return 0
+        i = 0
+        while i < len(nums):
+            if nums[i] - nums[i - 1] == 2:
+                return nums[i] - 1
+            i += 1
+            if i == len(nums):
+                return i 
