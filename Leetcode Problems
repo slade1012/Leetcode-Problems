@@ -672,10 +672,17 @@ class Solution(object):
         nums = sorted(nums)
         if nums[0] != 0:
             return 0
-        i = 0
-        while i < len(nums):
-            if nums[i] - nums[i - 1] == 2:
-                return nums[i] - 1
-            i += 1
-            if i == len(nums):
-                return i 
+        if nums[len(nums) - 1] != len(nums):
+            return len(nums)
+        return self.find_missing_number(nums, len(nums) - 1, 0)
+    
+    def find_missing_number(self, nums, upper, lower):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return nums[middle_index] - 1
+        if nums[middle_index] - nums[middle_index - 1] == 2:
+            return nums[middle_index] - 1
+        if middle_index + 1 == nums[middle_index] + 1:
+            return self.find_missing_number(nums, upper, middle_index + 1)
+        else:
+            return self.find_missing_number(nums, middle_index - 1, lower)
