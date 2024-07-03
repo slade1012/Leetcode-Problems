@@ -686,3 +686,60 @@ class Solution(object):
             return self.find_missing_number(nums, upper, middle_index + 1)
         else:
             return self.find_missing_number(nums, middle_index - 1, lower)
+
+You are given an array nums of non-negative integers. nums is considered special if there exists a number x such that there are exactly x numbers in nums that are greater than or equal to x.
+
+Notice that x does not have to be an element in nums.
+
+Return x if the array is special, otherwise, return -1. It can be proven that if nums is special, the value for x is unique.
+
+class Solution(object):
+    def specialArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums = sorted(nums)
+        return self.find_x(nums, len(nums) - 1, 0)
+    
+    def find_x(self, nums, upper, lower):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return -1
+        if nums[middle_index] >= len(nums) - middle_index:
+            if middle_index == 0:
+                return len(nums)
+            if middle_index == nums[len(nums) - 1]:
+                return -1
+            if nums[middle_index - 1] < len(nums) - middle_index:
+                return len(nums) - middle_index
+            else:
+                return self.find_x(nums, middle_index - 1, lower)
+        else:
+            return self.find_x(nums, upper, middle_index + 1)
+
+Given an array arr of positive integers sorted in a strictly increasing order, and an integer k.
+
+Return the kth positive integer that is missing from this array.
+
+class Solution(object):
+    def findKthPositive(self, arr, k):
+        """
+        :type arr: List[int]
+        :type k: int
+        :rtype: int
+        """
+        return self.find_right_element(arr, len(arr) - 1, 0, k)
+        
+    def find_right_element(self, arr, upper, lower, k):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return k + middle_index + 1
+        if k > arr[middle_index] - middle_index - 1:
+            if middle_index >= len(arr) - 1:
+                return k + middle_index + 1
+            return self.find_right_element(arr, upper, middle_index + 1, k)
+        else:
+            if middle_index <= 0:
+                return range(arr[0])[k]
+            return self.find_right_element(arr, middle_index - 1, lower, k)
