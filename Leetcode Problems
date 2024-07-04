@@ -780,3 +780,27 @@ class Solution(object):
             return self.get_j_index(nums1, nums2, upper, middle_index + 1)
         else:
             return self.get_j_index(nums1, nums2, middle_index - 1, lower)
+
+Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        return self.search_target(nums, len(nums) - 1, 0, target)
+    
+    def search_target(self, nums, upper, lower, target):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return -1
+        if nums[middle_index] == target:
+            return middle_index
+        elif nums[middle_index] > target:
+            return self.search_target(nums, middle_index - 1, lower, target)
+        else:
+            return self.search_target(nums, upper, middle_index + 1, target)
