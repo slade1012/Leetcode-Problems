@@ -743,3 +743,40 @@ class Solution(object):
             if middle_index <= 0:
                 return range(arr[0])[k]
             return self.find_right_element(arr, middle_index - 1, lower, k)
+
+Given two integer arrays nums1 and nums2, sorted in non-decreasing order, return the minimum integer common to both arrays. If there is no common integer amongst nums1 and nums2, return -1.
+
+Note that an integer is said to be common to nums1 and nums2 if both arrays have at least one occurrence of that integer.
+
+class Solution(object):
+    def getCommon(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: int
+        """
+        i = 0
+        j = self.get_j_index(nums1, nums2, len(nums2) - 1, 0)
+        while i < len(nums1) and j < len(nums2):
+            if nums1[i] == nums2[j]:
+                return nums1[i]
+            elif nums1[i] < nums2[j]:
+                i += 1
+            else:
+                j += 1
+        return -1
+
+    def get_j_index(self, nums1, nums2, upper, lower):
+        middle_index = (upper + lower) // 2
+        if middle_index <= 0:
+            return 0
+        if middle_index >= len(nums2) - 1:
+            return len(nums2) - 1
+        if upper < lower:
+            return middle_index
+        if nums1[0] > nums2[middle_index]:
+            if nums1[0] < nums2[middle_index + 1]:
+                return middle_index
+            return self.get_j_index(nums1, nums2, upper, middle_index + 1)
+        else:
+            return self.get_j_index(nums1, nums2, middle_index - 1, lower)
