@@ -804,3 +804,118 @@ class Solution(object):
             return self.search_target(nums, middle_index - 1, lower, target)
         else:
             return self.search_target(nums, upper, middle_index + 1, target)
+
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+
+class Solution(object):
+    def find_nums_2_index(self, nums1_element, nums2, upper, lower):
+        middle_index = (upper + lower) // 2
+        if upper < lower:
+            return None
+        if nums2[middle_index] > nums1_element:
+            return self.find_nums_2_index(nums1_element, nums2, middle_index - 1, lower)
+        if nums2[middle_index] < nums1_element:
+            return self.find_nums_2_index(nums1_element, nums2, upper, middle_index + 1)
+        return middle_index
+
+    def intersect(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        from collections import Counter
+
+        nums1_counter = Counter(nums1)
+        nums2_counter = Counter(nums2)
+        final_counter = Counter([])
+        for num, count in nums1_counter.items():
+            if num in nums2_counter:
+                final_counter[num] = min(count, nums2_counter[num])
+        return [
+            result
+            for num, count in final_counter.items()
+            for result in [num] * count
+        ]
+        # lst= []
+        # nums2 = sorted(nums2)
+        # nums2_remain = [n for n in nums2]
+        # for nums1_element in nums1:
+        #     index = self.find_nums_2_index(nums1_element, nums2_remain, len(nums2_remain) - 1, 0)
+        #     if index is None:
+        #         continue
+        #     nums2_remain = nums2_remain[:index] + nums2_remain[index + 1:]
+        #     lst.append(nums1_element)
+        #     if len(nums2_remain) == 0:
+        #         break
+        # return lst
+
+We are playing the Guess Game. The game is as follows:
+
+I pick a number from 1 to n. You have to guess which number I picked.
+
+Every time you guess wrong, I will tell you whether the number I picked is higher or lower than your guess.
+
+You call a pre-defined API int guess(int num), which returns three possible results:
+
+-1: Your guess is higher than the number I picked (i.e. num > pick).
+1: Your guess is lower than the number I picked (i.e. num < pick).
+0: your guess is equal to the number I picked (i.e. num == pick).
+Return the number that I picked.
+
+# The guess API is already defined for you.
+# @param num, your guess
+# @return -1 if num is higher than the picked number
+#          1 if num is lower than the picked number
+#          otherwise return 0
+# def guess(num):
+
+class Solution(object):
+    def guessNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        return self.guessed_number(n - 1, 0)
+        
+    def guessed_number(self, upper, lower):
+        middle_index = (upper + lower) // 2
+        if guess(middle_index + 1) == 1:
+            return self.guessed_number(upper, middle_index + 1)
+        elif guess(middle_index + 1) == -1:
+            return self.guessed_number(middle_index - 1, lower)
+        else:
+            return middle_index + 1
+
+Alice and Bob have a different total number of candies. You are given two integer arrays aliceSizes and bobSizes where aliceSizes[i] is the number of candies of the ith box of candy that Alice has and bobSizes[j] is the number of candies of the jth box of candy that Bob has.
+
+Since they are friends, they would like to exchange one candy box each so that after the exchange, they both have the same total amount of candy. The total amount of candy a person has is the sum of the number of candies in each box they have.
+
+Return an integer array answer where answer[0] is the number of candies in the box that Alice must exchange, and answer[1] is the number of candies in the box that Bob must exchange. If there are multiple answers, you may return any one of them. It is guaranteed that at least one answer exists.
+
+class Solution(object):
+    def fairCandySwap(self, aliceSizes, bobSizes):
+        """
+        :type aliceSizes: List[int]
+        :type bobSizes: List[int]
+        :rtype: List[int]
+        """
+        def find_target(bobSizes, target, upper, lower):
+            middle_index = (upper + lower) // 2
+            if upper < lower:
+                return False
+            if bobSizes[middle_index] > target:
+                return find_target(bobSizes, target, middle_index - 1, lower)
+            if bobSizes[middle_index] < target:
+                return find_target(bobSizes, target, upper, middle_index + 1)
+            return True
+            
+        bobSizes = sorted(bobSizes)
+        aliceSizesSum = sum(aliceSizes)
+        bobSizesSum = sum(bobSizes)
+        diff = aliceSizesSum - bobSizesSum
+        for aliceSizesElement in aliceSizes:
+            target = aliceSizesElement - diff // 2
+            found = find_target(bobSizes, target, len(bobSizes) - 1, 0)
+            if found:
+                return [aliceSizesElement, target]
