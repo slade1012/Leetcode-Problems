@@ -919,3 +919,51 @@ class Solution(object):
             found = find_target(bobSizes, target, len(bobSizes) - 1, 0)
             if found:
                 return [aliceSizesElement, target]
+
+Given the root of a complete binary tree, return the number of the nodes in the tree.
+
+According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
+
+Design an algorithm that runs in less than O(n) time complexity.
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def countNodes(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root is None:
+            return 0
+        if root.right is None and root.left is None:
+            return 1
+        def count_depth(root):
+            if root is None:
+                return 0
+            return count_depth(root.left) + 1
+            
+        def return_nodes(root, depth):
+            if depth == 0:
+                return [root]
+            return return_nodes(root.left, depth - 1) + return_nodes(root.right, depth - 1)
+
+        def count_bottom_nodes(node_list, upper, lower):
+            middle_index = (upper + lower) // 2
+            if upper < lower:
+                return middle_index * 2 + 2
+            if node_list[middle_index].left is None:
+                return count_bottom_nodes(node_list, middle_index - 1, lower)
+            if node_list[middle_index].right is None:
+                return middle_index * 2 + 1
+            return count_bottom_nodes(node_list, upper, middle_index + 1)
+        
+        depth = count_depth(root)
+
+        node_list = return_nodes(root, depth - 2)
+
+        return 2 ** (depth - 1) - 1 + count_bottom_nodes(node_list, 2 ** (depth - 2) - 1, 0)
