@@ -1069,4 +1069,59 @@ class Solution(object):
 
         return find_square_root(num, 0)
 
+In the universe Earth C-137, Rick discovered a special form of magnetic force between two balls if they are put in his new invented basket. Rick has n empty baskets, the ith basket is at position[i], Morty has m balls and needs to distribute the balls into the baskets such that the minimum magnetic force between any two balls is maximum.
 
+Rick stated that magnetic force between two different balls at positions x and y is |x - y|.
+
+Given the integer array position and the integer m. Return the required force.
+
+class Solution(object):
+    def maxDistance(self, position, m):
+        """
+        :type position: List[int]
+        :type m: int
+        :rtype: int
+        """
+        position = sorted(position)
+
+        def find_minimum_ge_gap(gap, up, low):
+            middle_index = (up + low) // 2
+            # print(f"find_min_ge_gap: {middle_index=},{up=},{low=}, {gap=}")
+            if low > len(position):
+                return None
+            if up < low:
+                return low
+            if position[middle_index] >= gap:
+                return find_minimum_ge_gap(gap, middle_index - 1, low)
+            return find_minimum_ge_gap(gap, up, middle_index + 1)
+        
+        
+        def can_place_balls(i, gap, position, m):
+            while m > 0:
+                # print(f"can_place_balls: {i=},{gap=}")
+                if i > len(position) - 1:
+                    return False
+                i = find_minimum_ge_gap(position[i] + gap, len(position) - 1, 1)
+                if i is None:
+                    return False
+                m -= 1
+            print('True')
+            return True
+        
+        def find_gap(upper, lower):
+            middle = (upper + lower) // 2
+            # print(f"{upper=},{lower=},{middle=}")
+            if upper < lower:
+                return middle
+            if can_place_balls(0, middle, position, m):
+                return find_gap(upper, middle + 1)
+            return find_gap(middle - 1, lower)
+        
+            
+        # for gap in reversed(range(2, (position[-1])//(m - 1) + 1)):
+        #     print(f"{gap=}")
+        #     if can_place_balls(gap, position, m):
+        #         return gap
+        # return 1
+
+        return find_gap((position[-1] - position[0]) // (m - 1), 2)
