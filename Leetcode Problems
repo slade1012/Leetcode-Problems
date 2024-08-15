@@ -1158,3 +1158,27 @@ class Solution:
             return find_capacity(middle - 1, lower)
         
         return find_capacity(max_cap, min_cap)
+
+Write an algorithm to determine if a number n is happy.
+
+A happy number is a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy.
+Return true if n is a happy number, and false if not.
+
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        res = 0
+        lst = []
+        while n != 1:
+            for i in range(len(str(n))):
+                res += (int(str(n)[i])) ** 2
+            print(f"{res=}")
+            n = res
+            if n in lst:
+                return False
+            lst.append(n)
+            res = 0
+        return True
