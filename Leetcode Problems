@@ -1182,3 +1182,27 @@ class Solution:
             lst.append(n)
             res = 0
         return True
+
+Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        if head is None:
+            return None
+        lst = []
+        while head:
+            if head.val != val:
+                lst.append(head.val)
+            head = head.next
+        if len(lst) == 0:
+            return None
+        res = cur = ListNode(lst[0])
+        for i in range(1, len(lst)):
+            cur.next = ListNode(lst[i])
+            cur = cur.next
+        return res
