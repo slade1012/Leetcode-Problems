@@ -1206,3 +1206,15 @@ class Solution:
             cur.next = ListNode(lst[i])
             cur = cur.next
         return res
+
+Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.
+
+class Solution:
+    def addDigits(self, num: int) -> int:
+        while len(str(num)) != 1:
+            res = 0
+            for i in range(len(str(num))):
+                print(f"{i=},{num=}")
+                res += int(str(num)[i])
+            num = res
+        return num
