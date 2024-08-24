@@ -1283,3 +1283,17 @@ class Solution:
             cur.next = ListNode(lst[i])
             cur = cur.next
         return res
+
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        dic = {}
+        for element in nums:
+            if element not in dic.keys():
+                dic[element] = 1
+            else:
+                dic[element] += 1
+            if dic[element] > len(nums) // 2:
+                return element
