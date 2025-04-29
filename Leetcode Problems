@@ -1592,3 +1592,20 @@ class Solution:
             print(f"{i=}")
             res[i] = prev[i - 1] + prev[i]
         return res
+
+Given two strings s and t, determine if they are isomorphic.
+
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        d = {}
+        lst = []
+        for i in range(len(s)):
+            d[s[i]] = t[i]
+        for i in range(len(s)):
+            if d[s[i]] != t[i]:
+                return False
+        for i in d.values():
+            if i in lst:
+                return False
+            lst.append(i)
+        return True
