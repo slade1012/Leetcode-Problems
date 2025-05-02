@@ -1695,3 +1695,20 @@ class Solution:
                 if i < len(nums):
                     first = nums[i]
         return ans
+
+Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        string = ''
+        while head:
+            string = string + str(head.val)
+            head = head.next
+        if string == string[::-1]:
+            return True
+        return False
