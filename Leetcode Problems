@@ -1908,3 +1908,22 @@ class Solution:
             elif int(lst[i]) % 3 == 0:
                 lst[i] = 'Fizz'
         return lst
+
+Given an integer array nums, return the third distinct maximum number in this array. If the third maximum does not exist, return the maximum number.
+
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        lst = []
+        nums = sorted(nums)
+        count = 0
+        nums = nums[::-1]
+        if len(nums) <= 2:
+            return nums[0]
+        for i in range(len(nums)):
+            if nums[i] not in lst:
+                count += 1
+                lst.append(nums[i])
+            if count == 3:
+                return nums[i]
+        if count < 3:
+            return nums[0]
