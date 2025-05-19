@@ -1974,3 +1974,16 @@ class Solution:
             if area // i * i == area:
                 lst.append([area // i, i])
         return lst[len(lst) // 2]
+
+A binary watch has 4 LEDs on the top to represent the hours (0-11), and 6 LEDs on the bottom to represent the minutes (0-59). Each LED represents a zero or one, with the least significant bit on the right.
+
+class Solution:
+    def readBinaryWatch(self, turnedOn: int) -> List[str]:
+        ans = []
+        for h in range(12):
+            for m in range(60):
+                hOnes = bin(h).count('1')
+                mOnes = bin(m).count('1')
+                if hOnes + mOnes == turnedOn:
+                    ans.append(f'{h}:{m:02d}')
+        return ans
