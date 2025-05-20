@@ -2002,3 +2002,19 @@ class Solution:
                     if j > 0 and grid[i][j - 1] == 1:
                         ans -= 2
         return ans
+
+Given a string s which consists of lowercase or uppercase letters, return the length of the longest palindrome that can be built with those letters.
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        ans = 0
+        character_set = set()
+        for char in s:
+            if char in character_set:
+                character_set.remove(char)
+                ans += 2
+            else:
+                character_set.add(char)
+        if character_set:
+            ans += 1
+        return ans
