@@ -2067,3 +2067,9 @@ class Solution:
             result = (result << 1) | bit
             n >>= 1
         return result
+
+Given a positive integer n, write a function that returns the number of set bits in its binary representation (also known as the Hamming weight).
+
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        return bin(n).count('1')
