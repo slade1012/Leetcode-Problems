@@ -2033,3 +2033,12 @@ Given a string s, return the string after replacing every uppercase letter with 
 class Solution:
     def toLowerCase(self, s: str) -> str:
         return s.lower()
+
+The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+
+Given two integers x and y, return the Hamming distance between them.
+
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        xor = x ^ y
+        return bin(x ^ y).count('1')
