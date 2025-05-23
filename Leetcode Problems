@@ -2139,3 +2139,27 @@ class Solution:
         root1.left = self.mergeTrees(root1.left, root2.left)
         root1.right = self.mergeTrees(root1.right, root2.right)
         return root1
+
+Given the root of an n-ary tree, return the preorder traversal of its nodes' values.
+
+Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)
+
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: Optional[int] = None, children: Optional[List['Node']] = None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        ans = []
+        self.traverse(root, ans)
+        return ans
+    def traverse(self, node, ans):
+        if not node:
+            return
+        ans.append(node.val)
+        for child in node.children:
+            self.traverse(child, ans)
