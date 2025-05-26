@@ -2212,3 +2212,18 @@ class Solution:
             res.append(root.val)
         dfs(root)
         return res
+
+Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values.
+
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        n = bin(n)
+        s = str(n)
+        for i in range(len(s)):
+            if i == len(s) - 1:
+                return True
+            if s[i] != s[i + 1]:
+                continue
+            else:
+                return False
+        return True
