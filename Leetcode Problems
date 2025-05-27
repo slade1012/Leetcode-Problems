@@ -2227,3 +2227,32 @@ class Solution:
             else:
                 return False
         return True
+
+We have two special characters:
+
+The first character can be represented by one bit 0.
+The second character can be represented by two bits (10 or 11).
+Given a binary array bits that ends with 0, return true if the last character must be a one-bit character.
+
+class Solution:
+    def isOneBitCharacter(self, bits: List[int]) -> bool:
+        if bits == [0]:
+            return True
+        while bits:
+            if len(bits) > 1:
+                if [bits[0], bits[1]] == [1,0]:
+                    bits.pop(0)
+                    bits.pop(0)
+            if bits == [1]:
+                return False
+            if bits == [0]:
+                return True
+            if len(bits) > 1:
+                if [bits[0], bits[1]] == [1,1]:
+                    bits.pop(0)
+                    bits.pop(0)
+            if bits == []:
+                return False
+            if bits[0] == 0:
+                bits.pop(0)
+        return True
