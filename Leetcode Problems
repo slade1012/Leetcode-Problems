@@ -2313,3 +2313,29 @@ class Solution:
                     if curr > area:
                         area = curr
         return area
+
+Given an n x n binary matrix image, flip the image horizontally, then invert it, and return the resulting image.
+
+To flip an image horizontally means that each row of the image is reversed.
+
+For example, flipping [1,1,0] horizontally results in [0,1,1].
+To invert an image means that each 0 is replaced by 1, and each 1 is replaced by 0.
+
+For example, inverting [0,1,1] results in [1,0,0].
+
+class Solution:
+    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+        lst1 = []
+        lst2 = []
+        for element in image:
+            element = element[::-1]
+            for element1 in element:
+                if element1 == 0:
+                    element1 = 1
+                else:
+                    element1 = 0
+                lst2.append(element1)
+        while lst2:
+            lst1.append(lst2[0:len(image[0])])
+            lst2 = lst2[len(image[0]):]
+        return lst1
