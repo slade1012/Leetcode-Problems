@@ -2483,3 +2483,22 @@ class Solution:
                 if matrix[i][j] == min(matrix[i]) and matrix[i][j] == max(matrix[z][j] for z in range(len(matrix))):
                     lst.append(matrix[i][j])
         return lst
+
+You are given an integer n and an integer start.
+
+Define an array nums where nums[i] = start + 2 * i (0-indexed) and n == nums.length.
+
+Return the bitwise XOR of all elements of nums.
+
+class Solution:
+    def xorOperation(self, n: int, start: int) -> int:
+        lst = []
+        i = 0
+        ans = 0
+        while n != 0:
+            n -= 1
+            lst.append(start + 2 * i)
+            i += 1
+        for i in range(len(lst)):
+            ans = ans ^ lst[i]
+        return ans
