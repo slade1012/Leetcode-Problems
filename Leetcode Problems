@@ -2470,3 +2470,16 @@ class Solution:
         findSequence(root1, root1seq)
         findSequence(root2, root2seq)
         return root1seq == root2seq
+
+Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order.
+
+A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in its column.
+
+class Solution:
+    def luckyNumbers(self, matrix: List[List[int]]) -> List[int]:
+        lst = []
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == min(matrix[i]) and matrix[i][j] == max(matrix[z][j] for z in range(len(matrix))):
+                    lst.append(matrix[i][j])
+        return lst
