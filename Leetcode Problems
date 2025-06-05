@@ -2502,3 +2502,16 @@ class Solution:
         for i in range(len(lst)):
             ans = ans ^ lst[i]
         return ans
+
+Given a binary string s ​​​​​without leading zeros, return true​​​ if s contains at most one contiguous segment of ones. Otherwise, return false.
+
+class Solution:
+    def checkOnesSegment(self, s: str) -> bool:
+        if '0' not in s:
+            return True
+        while s[0] == '1':
+            s = s[1:]
+        if '1' in s:
+            return False
+        else:
+            return True
