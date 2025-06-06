@@ -2555,3 +2555,18 @@ class Solution:
             lst.append(first ^ encoded[i])
             first = first ^ encoded[i]
         return lst
+
+Given an integer n (in base 10) and a base k, return the sum of the digits of n after converting n from base 10 to base k.
+
+After converting, each digit should be interpreted as a base 10 number, and the sum should be returned in base 10.
+
+class Solution:
+    def sumBase(self, n: int, k: int) -> int:
+        string = ''
+        res = 0
+        while n != 0:
+            string += str(n % k)
+            n = n // k
+        for i in range(len(string)):
+            res += int(string[i])
+        return res
