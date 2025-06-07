@@ -2621,3 +2621,16 @@ class Solution:
             findaverage(node.right, level + 1)
         findaverage(root, 1)
         return [i[0] / i[1] for i in res]
+
+Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+
+Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        s = 0
+        lst = []
+        while s != n:
+            lst += [nums[s], nums[s + n]]
+            s += 1
+        return lst
