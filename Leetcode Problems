@@ -2634,3 +2634,20 @@ class Solution:
             lst += [nums[s], nums[s + n]]
             s += 1
         return lst
+
+Given two arrays arr1 and arr2, the elements of arr2 are distinct, and all elements in arr2 are also in arr1.
+
+Sort the elements of arr1 such that the relative ordering of items in arr1 are the same as in arr2. Elements that do not appear in arr2 should be placed at the end of arr1 in ascending order.
+
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        lst = []
+        for i in range(len(arr2)):
+            while arr2[i] in arr1:
+                arr1.remove(arr2[i])
+                lst.append(arr2[i])
+        arr1 = sorted(arr1)
+        for i in range(len(arr1)):
+            if arr1[i] not in arr2:
+                lst.append(arr1[i])
+        return lst
