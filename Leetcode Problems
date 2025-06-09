@@ -2661,3 +2661,19 @@ Return the answer as one of the following values {"Sunday", "Monday", "Tuesday",
 class Solution:
     def dayOfTheWeek(self, day: int, month: int, year: int) -> str:
         return date(year, month, day).strftime('%A')
+
+Given an array of integers arr, replace each element with its rank.
+
+The rank represents how large the element is. The rank has the following rules:
+
+Rank is an integer starting from 1.
+The larger the element, the larger the rank. If two elements are equal, their rank must be the same.
+Rank should be as small as possible.
+
+class Solution:
+    def arrayRankTransform(self, arr: List[int]) -> List[int]:
+        my_list = sorted(set(arr))
+        rank = {value : rank + 1 for rank, value in enumerate(my_list)}
+        for i in range(len(arr)):
+            arr[i] = rank[arr[i]]
+        return arr
