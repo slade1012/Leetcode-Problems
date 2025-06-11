@@ -2737,3 +2737,30 @@ A defanged IP address replaces every period "." with "[.]".
 class Solution:
     def defangIPaddr(self, address: str) -> str:
         return address.replace('.', '[.]')
+
+Given the root of a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def increasingBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        lst = []
+        def helper(node):
+            if not node:
+                return
+            lst.append(node.val)
+            helper(node.left)
+            helper(node.right)
+        helper(root)
+        lst = sorted(lst)
+        ans = TreeNode(lst[0])
+        res = ans
+        while len(lst) > 1:
+            ans.right = TreeNode(lst[1])
+            ans = ans.right
+            lst.pop(1)
+        return res
