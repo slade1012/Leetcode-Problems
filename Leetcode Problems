@@ -2729,3 +2729,11 @@ Note: You are not allowed to use any built-in library method to directly solve t
 class Solution:
     def toHex(self, num: int) -> str:
         return "{0:x}".format(num) if num >= 0 else "{0:x}".format(num + 2 ** 32)
+
+Given a valid (IPv4) IP address, return a defanged version of that IP address.
+
+A defanged IP address replaces every period "." with "[.]".
+
+class Solution:
+    def defangIPaddr(self, address: str) -> str:
+        return address.replace('.', '[.]')
