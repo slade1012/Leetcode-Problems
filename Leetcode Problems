@@ -2967,3 +2967,15 @@ class Solution:
             if len(str(element)) % 2 == 0:
                 count += 1
         return count
+
+Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+
+Return the answer in an array.
+
+class Solution:
+    def findNumbers(self, nums: List[int]) -> int:
+        count = 0
+        for element in nums:
+            if len(str(element)) % 2 == 0:
+                count += 1
+        return count
