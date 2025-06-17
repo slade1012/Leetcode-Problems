@@ -3011,3 +3011,15 @@ class Solution:
             product = product * int(str_n[i])
             res = res + int(str_n[i])
         return product - res
+
+Given an array of string words, return all strings in words that are a substring of another word. You can return the answer in any order.
+
+class Solution:
+    def stringMatching(self, words: List[str]) -> List[str]:
+        lst = []
+        for i in range(len(words)):
+            for element in words:
+                if words[i] != element and words[i] in element:
+                    if words[i] not in lst:
+                        lst.append(words[i])
+        return lst
