@@ -3082,3 +3082,23 @@ class Solution:
                 if i != j:
                     lst.append((nums[i] - 1) * (nums[j] - 1))
         return max(lst)
+
+You are given the array paths, where paths[i] = [cityAi, cityBi] means there exists a direct path going from cityAi to cityBi. Return the destination city, that is, the city without any path outgoing to another city.
+
+It is guaranteed that the graph of paths forms a line without any loop, therefore, there will be exactly one destination city.
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        lst1 = []
+        lst2 = []
+        for element in paths:
+            if element[0] not in lst2:
+                lst2.append(element[0])
+            for i in range(len(element)):
+                if element[i] not in lst1:
+                    lst1.append(element[i])
+        print(lst1)
+        print(lst2)
+        for element in lst1:
+            if element not in lst2:
+                return element
