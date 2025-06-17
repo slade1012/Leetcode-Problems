@@ -2999,3 +2999,15 @@ class Solution:
         if lst == []:
             return -1
         return max(lst)
+
+Given an integer number n, return the difference between the product of its digits and the sum of its digits.
+
+class Solution:
+    def subtractProductAndSum(self, n: int) -> int:
+        product = 1
+        res = 0
+        str_n = str(n)
+        for i in range(len(str_n)):
+            product = product * int(str_n[i])
+            res = res + int(str_n[i])
+        return product - res
