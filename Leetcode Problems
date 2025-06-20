@@ -3241,3 +3241,14 @@ class Solution:
             if k > 0:
                 code[i] = sum(double_code[i + 1: i + k + 1])
         return code
+
+You are given an m x n integer grid accounts where accounts[i][j] is the amount of money the i​​​​​​​​​​​th​​​​ customer has in the j​​​​​​​​​​​th​​​​ bank. Return the wealth that the richest customer has.
+
+A customer's wealth is the amount of money they have in all their bank accounts. The richest customer is the customer that has the maximum wealth.
+
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        lst = []
+        for element in accounts:
+            lst.append(sum(element))
+        return max(lst)
