@@ -3387,3 +3387,23 @@ class Solution:
             lst.append(altitude)
             print(lst)
         return max(lst)
+
+You are given an integer array nums. The unique elements of an array are the elements that appear exactly once in the array.
+
+Return the sum of all the unique elements of nums.
+
+class Solution:
+    def sumOfUnique(self, nums: List[int]) -> int:
+        d = {}
+        lst = []
+        for i in range(len(nums)):
+            if nums[i] not in d.keys():
+                d[nums[i]] = 1
+            else:
+                d[nums[i]] += 1
+        print(d)
+        for element in list(d.keys()):
+            if d[element] == 1:
+                lst.append(element)
+        print(lst)
+        return sum(lst)
