@@ -3658,3 +3658,22 @@ class Solution:
             head1 = head1.next
             head2 = head2.next.next
         return head1
+
+Given a string s, return true if s is a good string, or false otherwise.
+
+A string s is good if all the characters that appear in s have the same number of occurrences (i.e., the same frequency).
+
+class Solution:
+    def areOccurrencesEqual(self, s: str) -> bool:
+        d = {}
+        for i in range(len(s)):
+            if s[i] not in d.keys():
+                d[s[i]] = 1
+            else:
+                d[s[i]] += 1
+        for i in range(len(list(d.values())) - 1):
+            if list(d.values())[i] == list(d.values())[i + 1]:
+                continue
+            else:
+                return False
+        return True
