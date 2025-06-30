@@ -3741,3 +3741,17 @@ class Solution:
                 i += 1
         ans += s[i:]
         return ans
+
+Given an integer array nums, return the greatest common divisor of the smallest number and largest number in nums.
+
+The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.
+
+class Solution:
+    def findGCD(self, nums: List[int]) -> int:
+        lst = []
+        for i in range(1, max(nums) + 1):
+            if min(nums) % i == 0 and max(nums) % i == 0:
+                lst.append(i)
+        if not lst:
+            return 1
+        return max(lst)
