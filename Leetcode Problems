@@ -3771,3 +3771,32 @@ class Solution:
                 if abs(nums[i] - nums[j]) == k:
                     count += 1
         return count
+
+Given three integer arrays nums1, nums2, and nums3, return a distinct array containing all the values that are present in at least two out of the three arrays. You may return the values in any order.
+
+class Solution:
+    def twoOutOfThree(self, nums1: List[int], nums2: List[int], nums3: List[int]) -> List[int]:
+        lst1 = []
+        for i in range(len(nums1)):
+            if nums1[i] not in lst1:
+                lst1.append(nums1[i])
+        lst2 = []
+        for i in range(len(nums2)):
+            if nums2[i] not in lst2:
+                lst2.append(nums2[i])
+        lst3 = []
+        for i in range(len(nums3)):
+            if nums3[i] not in lst3:
+                lst3.append(nums3[i])
+        lst4 = []
+        for i in range(len(lst1)):
+            if lst1[i] in lst2 or lst1[i] in lst3:
+                lst4.append(lst1[i])
+        for i in range(len(lst2)):
+            if lst2[i] in lst3:
+                lst4.append(lst2[i])
+        lst5 = []
+        for i in lst4:
+            if i not in lst5:
+                lst5.append(i)
+        return lst5
