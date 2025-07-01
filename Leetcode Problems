@@ -3893,3 +3893,14 @@ class Solution:
             if i % 10 == nums[i]:
                 return i
         return -1
+
+Given an array of strings words, return the first palindromic string in the array. If there is no such string, return an empty string "".
+
+A string is palindromic if it reads the same forward and backward.
+
+class Solution:
+    def firstPalindrome(self, words: List[str]) -> str:
+        for element in words:
+            if element == element[::-1]:
+                return element
+        return ''
