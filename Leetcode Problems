@@ -3995,3 +3995,44 @@ class Solution:
         for i in range(len(seats)):
             ans += abs(seats[i] - students[i])
         return ans
+
+Two strings word1 and word2 are considered almost equivalent if the differences between the frequencies of each letter from 'a' to 'z' between word1 and word2 is at most 3.
+
+Given two strings word1 and word2, each of length n, return true if word1 and word2 are almost equivalent, or false otherwise.
+
+The frequency of a letter x is the number of times it occurs in the string.
+
+class Solution:
+    def checkAlmostEquivalent(self, word1: str, word2: str) -> bool:
+        d1 = {}
+        d2 = {}
+        diff = 0
+        lst = []
+        for i in range(len(word1)):
+            if word1[i] not in d1.keys():
+                d1[word1[i]] = 1
+            else:
+                d1[word1[i]] += 1
+            if word2[i] not in d2.keys():
+                d2[word2[i]] = 1
+            else:
+                d2[word2[i]] += 1
+        for element in d1.keys():
+            if element in d2.keys():
+                diff += abs(d1[element] - d2[element])
+                lst.append(diff)
+                diff = 0
+            else:
+                diff += d1[element]
+                lst.append(diff)
+                diff = 0
+        for element in d2.keys():
+            if element in d1.keys():
+                diff += abs(d2[element] - d1[element])
+                lst.append(diff)
+                diff = 0
+            else:
+                diff += d2[element]
+                lst.append(diff)
+                diff = 0
+        return max(lst) <= 3
