@@ -3964,3 +3964,16 @@ class Solution:
                     if a ** 2 + b ** 2 == c ** 2:
                         count += 1
         return count * 2
+
+Given a string s consisting of only the characters 'a' and 'b', return true if every 'a' appears before every 'b' in the string. Otherwise, return false.
+
+class Solution:
+    def checkString(self, s: str) -> bool:
+        if 'b' not in s:
+            return True
+        for i in range(len(s)):
+            if s[i] == 'b':
+                if 'a' in s[i + 1:]:
+                    return False
+                else:
+                    return True
