@@ -4103,3 +4103,27 @@ class Solution:
         print(num1)
         print(num2)
         return num2 == num
+
+Given two string arrays words1 and words2, return the number of strings that appear exactly once in each of the two arrays.
+
+class Solution:
+    def countWords(self, words1: List[str], words2: List[str]) -> int:
+        d1 = {}
+        d2 = {}
+        count = 0
+        for element in words1:
+            if element in d1.keys():
+                d1[element] += 1
+            else:
+                d1[element] = 1
+        for element in words2:
+            if element in d2.keys():
+                d2[element] += 1
+            else:
+                d2[element] = 1
+        for element in d1.keys():
+            if d1[element] == 1:
+                if element in d2.keys():
+                    if d2[element] == 1:
+                        count += 1
+        return count
