@@ -4225,3 +4225,32 @@ class Solution:
         if not lst:
             return -1
         return max(lst)
+
+You are given a 0-indexed integer array nums. Rearrange the values of nums according to the following rules:
+
+Sort the values at odd indices of nums in non-increasing order.
+For example, if nums = [4,1,2,3] before this step, it becomes [4,3,2,1] after. The values at odd indices 1 and 3 are sorted in non-increasing order.
+Sort the values at even indices of nums in non-decreasing order.
+For example, if nums = [4,1,2,3] before this step, it becomes [2,1,4,3] after. The values at even indices 0 and 2 are sorted in non-decreasing order.
+Return the array formed after rearranging the values of nums.
+
+class Solution:
+    def sortEvenOdd(self, nums: List[int]) -> List[int]:
+        if len(nums) == 1:
+            return nums
+        nums_odd = []
+        nums_even = []
+        lst = []
+        for i in range(len(nums)):
+            if i % 2 == 0:
+                nums_even.append(nums[i])
+            else:
+                nums_odd.append(nums[i])
+        nums_odd = list(reversed(sorted(nums_odd)))
+        nums_even = sorted(nums_even)
+        for i in range(len(nums_odd)):
+            lst.append(nums_even[i])
+            lst.append(nums_odd[i])
+        if len(nums_even) > len(nums_odd):
+            lst.append(nums_even[i + 1])
+        return lst
