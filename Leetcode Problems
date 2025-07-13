@@ -4350,3 +4350,14 @@ class Solution:
         if str(max(lst)) == '0':
             return '000'
         return str(max(lst))
+
+Given a string s and a character letter, return the percentage of characters in s that equal letter rounded down to the nearest whole percent.
+
+class Solution:
+    def percentageLetter(self, s: str, letter: str) -> int:
+        count = 0 
+        for i in range(len(s)):
+            if s[i] == letter:
+                count += 1
+        print(count)
+        return int(count / len(s) * 100)
