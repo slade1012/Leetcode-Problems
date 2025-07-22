@@ -4551,3 +4551,21 @@ class Solution:
             if int(str(num)[i]) != 0 and num % int(str(num)[i]) == 0:
                 count += 1
         return count
+
+You are given a positive integer array nums.
+
+The element sum is the sum of all the elements in nums.
+The digit sum is the sum of all the digits (not necessarily distinct) that appear in nums.
+Return the absolute difference between the element sum and digit sum of nums.
+
+Note that the absolute difference between two integers x and y is defined as |x - y|.
+
+class Solution:
+    def differenceOfSum(self, nums: List[int]) -> int:
+        sum1 = 0
+        sum2 = 0
+        for element in nums:
+            sum1 += element
+            for i in range(len(str(element))):
+                sum2 += int(str(element)[i])
+        return abs(sum1 - sum2)
