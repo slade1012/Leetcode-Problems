@@ -4569,3 +4569,19 @@ class Solution:
             for i in range(len(str(element))):
                 sum2 += int(str(element)[i])
         return abs(sum1 - sum2)
+
+You are given a positive integer n. Each digit of n has a sign according to the following rules:
+
+The most significant digit is assigned a positive sign.
+Each other digit has an opposite sign to its adjacent digits.
+Return the sum of all digits with their corresponding sign.
+
+class Solution:
+    def alternateDigitSum(self, n: int) -> int:
+        ans = 0
+        for i in range(len(str(n))):
+            if i % 2 == 0:
+                ans += int(str(n)[i])
+            else:
+                ans += -int(str(n)[i])
+        return ans
