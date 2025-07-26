@@ -4701,3 +4701,12 @@ class Solution:
                 ans += i
                 continue
         return ans
+
+Given a positive integer num represented as a string, return the integer num without trailing zeros as a string.
+
+class Solution:
+    def removeTrailingZeros(self, num: str) -> str:
+        num = num[::-1]
+        while num[0] == '0':
+            num = num[1:]
+        return num[::-1]
