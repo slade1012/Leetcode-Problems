@@ -4730,3 +4730,18 @@ Return the maximum possible value of x.
 class Solution:
     def theMaximumAchievableX(self, num: int, t: int) -> int:
         return num + 2 * t
+
+You are given a 1-indexed integer array nums of length n.
+
+An element nums[i] of nums is called special if i divides n, i.e. n % i == 0.
+
+Return the sum of the squares of all special elements of nums.
+
+class Solution:
+    def sumOfSquares(self, nums: List[int]) -> int:
+        ans = 0
+        n = len(nums)
+        for i in range(len(nums)):
+            if n % (i + 1) == 0:
+                ans += nums[i] ** 2
+        return ans
