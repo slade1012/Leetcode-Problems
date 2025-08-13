@@ -4819,3 +4819,27 @@ class Solution:
         for element in words:
             ans += element[0]
         return ans == s
+
+You are given two positive integers low and high.
+
+An integer x consisting of 2 * n digits is symmetric if the sum of the first n digits of x is equal to the sum of the last n digits of x. Numbers with an odd number of digits are never symmetric.
+
+Return the number of symmetric integers in the range [low, high].
+
+class Solution:
+    def countSymmetricIntegers(self, low: int, high: int) -> int:
+        lst1 = []
+        lst2 = []
+        count = 0
+        for i in range(low, high + 1, 1):
+            if len(str(i)) % 2 == 1:
+                continue
+            for j in range(len(str(i)) // 2):
+                lst1.append(int(str(i)[j]))
+            for k in range(len(str(i)) // 2, len(str(i)), 1):
+                lst2.append(int(str(i)[k]))
+            if sum(lst1) == sum(lst2):
+                count += 1
+            lst1 = []
+            lst2 = []
+        return count
