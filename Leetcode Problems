@@ -4866,3 +4866,16 @@ class Solution:
             ans += '0'
         ans = ans + '1'
         return ans
+
+You are given a 0-indexed 2D integer array nums representing the coordinates of the cars parking on a number line. For any index i, nums[i] = [starti, endi] where starti is the starting point of the ith car and endi is the ending point of the ith car.
+
+Return the number of integer points on the line that are covered with any part of a car.
+
+class Solution:
+    def numberOfPoints(self, nums: List[List[int]]) -> int:
+        lst = []
+        for element in nums:
+            for i in range(element[0], element[1] + 1, 1):
+                if i not in lst:
+                    lst.append(i)
+        return len(lst)
