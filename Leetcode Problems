@@ -4926,3 +4926,23 @@ class Solution:
                 if lst[i] == lst[j]:
                     lst2.append(nums[i] + nums[j])
         return max(lst2)
+
+An array is considered special if the parity of every pair of adjacent elements is different. In other words, one element in each pair must be even, and the other must be odd.
+
+You are given an array of integers nums. Return true if nums is a special array, otherwise, return false.
+
+class Solution:
+    def isArraySpecial(self, nums: List[int]) -> bool:
+        if nums[0] % 2 == 1:
+            for i in range(len(nums)):
+                if i % 2 == 0 and nums[i] % 2 != 1:
+                    return False
+                if i % 2 == 1 and nums[i] % 2 != 0:
+                    return False
+        else:
+            for i in range(len(nums)):
+                if i % 2 == 1 and nums[i] % 2 != 1:
+                    return False
+                if i % 2 == 0 and nums[i] % 2 != 0:
+                    return False
+        return True
