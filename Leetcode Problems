@@ -4895,3 +4895,34 @@ class Solution:
             else:
                 ans = ans[::-1]
         return ans
+
+You are given an integer array nums. You have to find the maximum sum of a pair of numbers from nums such that the largest digit in both numbers is equal.
+
+For example, 2373 is made up of three distinct digits: 2, 3, and 7, where 7 is the largest among them.
+
+Return the maximum sum or -1 if no such pair exists.
+
+class Solution:
+    def maxSum(self, nums: List[int]) -> int:
+        biggest = 0
+        lst = []
+        lst2 = []
+        lst3 = []
+        for element in nums:
+            for i in range(len(str(element))):
+                if int(str(element)[i]) > biggest:
+                    biggest = int(str(element)[i])
+            lst.append(biggest)
+            biggest = 0
+        for i in range(len(lst)):
+            if lst[i] in lst3:
+                break
+            else:
+                lst3.append(lst[i])
+            if i == len(lst) - 1:
+                return -1
+        for i in range(len(lst) - 1):
+            for j in range(i + 1, len(lst)):
+                if lst[i] == lst[j]:
+                    lst2.append(nums[i] + nums[j])
+        return max(lst2)
