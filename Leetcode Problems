@@ -4946,3 +4946,16 @@ class Solution:
                 if i % 2 == 0 and nums[i] % 2 != 0:
                     return False
         return True
+
+Given a 0-indexed m x n integer matrix matrix, create a new 0-indexed matrix called answer. Make answer equal to matrix, then replace each element with the value -1 with the maximum element in its respective column.
+
+Return the matrix answer.
+
+class Solution:
+    def modifiedMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
+        answer = matrix
+        for element in matrix:
+            for i in range(len(element)):
+                if element[i] == -1:
+                    element[i] = max([element[i] for element in matrix])
+        return answer
