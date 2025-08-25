@@ -5048,3 +5048,27 @@ class Solution:
                 if (hours[i] + hours[j]) % 24 == 0:
                     count += 1
         return count
+
+You are given an integer array nums. In one operation, you can add or subtract 1 from any element of nums.
+
+Return the minimum number of operations to make all elements of nums divisible by 3.
+
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        count = 0
+        for i in range(len(nums)):
+            if nums[i] <= 3:
+                if nums[i] == 1:
+                    count += 1
+                elif nums[i] == 2:
+                    count += 1
+                else:
+                    continue
+            else:
+                if nums[i] % 3 == 1:
+                    count += 1
+                elif nums[i] % 3 == 2:
+                    count += 1
+                else:
+                    continue
+        return count
