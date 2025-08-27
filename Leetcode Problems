@@ -5179,3 +5179,20 @@ class Solution:
             nums = nums[:min_index] + [min(nums) * multiplier] + nums[min_index + 1:]
             k -= 1
         return nums
+
+You are given a string date representing a Gregorian calendar date in the yyyy-mm-dd format.
+
+date can be written in its binary representation obtained by converting year, month, and day to their binary representations without any leading zeroes and writing them down in year-month-day format.
+
+Return the binary representation of date.
+
+class Solution:
+    def convertDateToBinary(self, date: str) -> str:
+        lst = date.split('-')
+        ans = ''
+        for i in range(len(lst)):
+            if i != len(lst) - 1:
+                ans += bin(int(lst[i]))[2:] + '-'
+            else:
+                ans += bin(int(lst[i]))[2:]
+        return ans
