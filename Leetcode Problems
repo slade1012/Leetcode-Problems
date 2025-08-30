@@ -5258,3 +5258,21 @@ class Solution:
             if  height[i - 1] > threshold:
                 lst.append(i)
         return lst
+
+In the town of Digitville, there was a list of numbers called nums containing integers from 0 to n - 1. Each number was supposed to appear exactly once in the list, however, two mischievous numbers sneaked in an additional time, making the list longer than usual.
+
+As the town detective, your task is to find these two sneaky numbers. Return an array of size two containing the two numbers (in any order), so peace can return to Digitville.
+
+class Solution:
+    def getSneakyNumbers(self, nums: List[int]) -> List[int]:
+        d = {}
+        lst = []
+        for element in nums:
+            if element in d.keys():
+                d[element] += 1
+            else:
+                d[element] = 1
+        for element in d.keys():
+            if d[element] == 2:
+                lst.append(element)
+        return lst
