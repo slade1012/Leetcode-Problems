@@ -5334,3 +5334,20 @@ class Solution:
         for j in range(1, len(num), 2):
             sum2 += int(num[j])
         return sum1 == sum2
+
+You are given an integer array nums. Transform nums by performing the following operations in the exact order specified:
+
+Replace each even number with 0.
+Replace each odd numbers with 1.
+Sort the modified array in non-decreasing order.
+Return the resulting array after performing these operations.
+
+class Solution:
+    def transformArray(self, nums: List[int]) -> List[int]:
+        for i in range(len(nums)):
+            if nums[i] % 2 == 0:
+                nums = nums[:i] + [0] + nums[i + 1:]
+            else:
+                nums = nums[:i] + [1] + nums[i + 1:]
+        nums = sorted(nums)
+        return nums
