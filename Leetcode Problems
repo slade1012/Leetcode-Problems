@@ -5320,3 +5320,17 @@ class Solution:
             word = word + add
             add = ''
         return word[k - 1]
+
+You are given a string num consisting of only digits. A string of digits is called balanced if the sum of the digits at even indices is equal to the sum of digits at odd indices.
+
+Return true if num is balanced, otherwise return false.
+
+class Solution:
+    def isBalanced(self, num: str) -> bool:
+        sum1 = 0
+        sum2 = 0
+        for i in range(0, len(num), 2):
+            sum1 += int(num[i])
+        for j in range(1, len(num), 2):
+            sum2 += int(num[j])
+        return sum1 == sum2
