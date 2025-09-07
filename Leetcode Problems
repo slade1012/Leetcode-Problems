@@ -5437,3 +5437,15 @@ Return the minimum number of operations required to make the sum of the array di
 class Solution:
     def minOperations(self, nums: List[int], k: int) -> int:
         return sum(nums) % k
+
+Given a circular array nums, find the maximum absolute difference between adjacent elements.
+
+Note: In a circular array, the first and last elements are adjacent.
+
+class Solution:
+    def maxAdjacentDistance(self, nums: List[int]) -> int:
+        lst = []
+        for i in range(len(nums) - 1):
+            lst.append(abs(nums[i] - nums[i + 1]))
+        lst.append(abs(nums[0] - nums[len(nums) - 1]))
+        return max(lst)
