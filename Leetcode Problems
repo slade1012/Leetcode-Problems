@@ -5472,3 +5472,37 @@ class Solution:
             return 1
         else:
             return 0
+
+You are given a string s consisting of lowercase English letters ('a' to 'z').
+
+Your task is to:
+
+Find the vowel (one of 'a', 'e', 'i', 'o', or 'u') with the maximum frequency.
+Find the consonant (all other letters excluding vowels) with the maximum frequency.
+Return the sum of the two frequencies.
+
+Note: If multiple vowels or consonants have the same maximum frequency, you may choose any one of them. If there are no vowels or no consonants in the string, consider their frequency as 0.
+
+The frequency of a letter x is the number of times it occurs in the string.
+
+class Solution:
+    def maxFreqSum(self, s: str) -> int:
+        d_vowel = {}
+        d_consonant = {}
+        vowel = ['a', 'e', 'i', 'o', 'u']
+        consonant = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+        for i in range(len(s)):
+            if s[i] in vowel and s[i] not in d_vowel.keys():
+                d_vowel[s[i]] = 1
+            elif s[i] in vowel and s[i] in d_vowel.keys():
+                d_vowel[s[i]] += 1
+            elif s[i] in consonant and s[i] not in d_consonant.keys():
+                d_consonant[s[i]] = 1
+            else:
+                d_consonant[s[i]] += 1
+        if not list(d_vowel.values()):
+            return max(list(d_consonant.values())) 
+        elif not list(d_consonant.values()):
+            return max(list(d_vowel.values()))
+        else:
+            return max(list(d_vowel.values())) + max(list(d_consonant.values()))
