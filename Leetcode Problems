@@ -5506,3 +5506,35 @@ class Solution:
             return max(list(d_vowel.values()))
         else:
             return max(list(d_vowel.values())) + max(list(d_consonant.values()))
+
+You are given a string s consisting of lowercase English letters, and an integer k.
+
+Your task is to delete some (possibly none) of the characters in the string so that the number of distinct characters in the resulting string is at most k.
+
+Return the minimum number of deletions required to achieve this.
+
+class Solution:
+    def minDeletion(self, s: str, k: int) -> int:
+        d = {}
+        ans = 0
+        for i in range(len(s)):
+            if s[i] not in d.keys():
+                d[s[i]] = 1
+            else:
+                d[s[i]] += 1
+        count = 0
+        lst = []
+        for i in range(len(s)):
+            if s[i] not in lst:
+                count += 1
+                lst.append(s[i])
+        print(count)
+        while count > k:
+            d = dict(sorted(d.items(), key = lambda item: item[1]))
+            d[list(d.keys())[0]] -= 1
+            ans += 1
+            if d[list(d.keys())[0]] == 0:
+                d.pop(list(d.keys())[0])
+                count -= 1
+        print(count)
+        return ans
