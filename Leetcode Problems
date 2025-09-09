@@ -5538,3 +5538,20 @@ class Solution:
                 count -= 1
         print(count)
         return ans
+
+You are given an integer array nums.
+
+Return the smallest index i such that the sum of the digits of nums[i] is equal to i.
+
+If no such index exists, return -1.
+
+class Solution:
+    def smallestIndex(self, nums: List[int]) -> int:
+        s = 0
+        for i in range(len(nums)):
+            for j in range(len(str(nums[i]))):
+                s += int(str(nums[i])[j])
+            if s == i:
+                return i
+            s = 0
+        return -1
