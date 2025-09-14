@@ -5555,3 +5555,28 @@ class Solution:
                 return i
             s = 0
         return -1
+
+There is a circle of red and blue tiles. You are given an array of integers colors. The color of tile i is represented by colors[i]:
+
+colors[i] == 0 means that tile i is red.
+colors[i] == 1 means that tile i is blue.
+Every 3 contiguous tiles in the circle with alternating colors (the middle tile has a different color from its left and right tiles) is called an alternating group.
+
+Return the number of alternating groups.
+
+Note that since colors represents a circle, the first and the last tiles are considered to be next to each other.
+
+class Solution:
+    def numberOfAlternatingGroups(self, colors: List[int]) -> int:
+        count = 0
+        for i in range(len(colors)):
+            if i == len(colors) - 2:
+                if colors[i] != colors[i + 1] and colors[i + 1] != colors[0]:
+                    count += 1
+            if i == len(colors) - 1:
+                if colors[i] != colors[0] and colors[0] != colors[1]:
+                    count += 1
+            if i < len(colors) - 2:
+                if colors[i] != colors[i + 1] and colors[i + 1] != colors[i + 2]:
+                    count += 1
+        return count
