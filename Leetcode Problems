@@ -5640,3 +5640,17 @@ class Solution:
         d = dict(sorted(d.items(), key = lambda item: item[0]))
         d = dict(sorted(d.items(), key = lambda item: item[1]))
         return int(list(d.keys())[0])
+
+You are given a positive integer n.
+
+Return the maximum product of any two digits in n.
+
+Note: You may use the same digit twice if it appears more than once in n.
+
+class Solution:
+    def maxProduct(self, n: int) -> int:
+        lst = []
+        for i in range(len(str(n))):
+            lst.append(str(n)[i])
+        lst = sorted(lst)
+        return int(lst[len(lst) - 1]) * int(lst[len(lst) - 2])
