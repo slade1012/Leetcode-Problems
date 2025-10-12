@@ -5798,3 +5798,23 @@ class Solution:
             else:
                 num1 += i
         return num1 - num2
+
+You are given an integer array nums and an integer k.
+
+Return an integer denoting the sum of all elements in nums whose frequency is divisible by k, or 0 if there are no such elements.
+
+Note: An element is included in the sum exactly as many times as it appears in the array if its total frequency is divisible by k.
+
+class Solution:
+    def sumDivisibleByK(self, nums: List[int], k: int) -> int:
+        d = {}
+        s = 0
+        for element in nums:
+            if element not in d.keys():
+                d[element] = 1
+            else:
+                d[element] += 1
+        for element in nums:
+            if d[element] % k == 0:
+                s += element
+        return s
