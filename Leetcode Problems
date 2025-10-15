@@ -5829,3 +5829,23 @@ class Solution:
         for i in range(len(nums)):
             s += sum(nums[max(0, i - nums[i]): i + 1])
         return s
+
+You are given an array nums consisting of positive integers.
+
+Return the total frequencies of elements in nums such that those elements all have the maximum frequency.
+
+The frequency of an element is the number of occurrences of that element in the array.
+
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        d = {}
+        for element in nums:
+            if element not in d.keys():
+                d[element] = 1
+            else:
+                d[element] += 1
+        coef = 0
+        for element in d.keys():
+            if d[element] == max(d.values()):
+                coef += 1
+        return coef * max(d.values())
