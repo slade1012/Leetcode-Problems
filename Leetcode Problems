@@ -5906,3 +5906,19 @@ class Solution:
             if x in words[i]:
                 lst.append(i)
         return lst
+
+You are given an integer array nums containing positive integers. We define a function encrypt such that encrypt(x) replaces every digit in x with the largest digit in x. For example, encrypt(523) = 555 and encrypt(213) = 333.
+
+Return the sum of encrypted elements.
+
+class Solution:
+    def sumOfEncryptedInt(self, nums: List[int]) -> int:
+        add = 0
+        s = 0
+        for element in nums:
+            for i in range(len(str(element))):
+                if int(str(element)[i]) > add:
+                    add = int(str(element)[i])
+            s += int(str(add) * len(str(element)))
+            add = 0
+        return s
