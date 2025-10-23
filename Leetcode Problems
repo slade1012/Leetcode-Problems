@@ -5940,3 +5940,19 @@ class Solution:
                 num2 = num2 - num1
             count += 1
         return count
+
+Given a positive integer num, return the number of positive integers less than or equal to num whose digit sums are even.
+
+The digit sum of a positive integer is the sum of all its digits.
+
+class Solution:
+    def countEven(self, num: int) -> int:
+        s = 0
+        count = 0
+        for i in range(num + 1):
+            for j in range(len(str(i))):
+                s += int(str(i)[j])
+            if s % 2 == 0:
+                count += 1
+            s = 0
+        return count - 1
