@@ -6059,3 +6059,12 @@ class Solution:
                 res += 'al'
                 command = command[4:]
         return res
+
+Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        lst = []
+        for element in nums:
+            lst.append(element ** 2)
+        return sorted(lst)
