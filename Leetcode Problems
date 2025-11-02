@@ -6068,3 +6068,15 @@ class Solution:
         for element in nums:
             lst.append(element ** 2)
         return sorted(lst)
+
+You are given a positive integer n.
+
+Return the integer obtained by removing all zeros from the decimal representation of n.
+
+class Solution:
+    def removeZeros(self, n: int) -> int:
+        res = ''
+        for i in range(len(str(n))):
+            if str(n)[i] != '0':
+                res += str(n)[i]
+        return int(res)
