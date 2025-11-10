@@ -6108,3 +6108,34 @@ class Solution:
             if element not in nums:
                 lst.append(element)
         return sorted(lst)
+
+A sentence is a string of single-space separated words where each word consists only of lowercase letters.
+
+A word is uncommon if it appears exactly once in one of the sentences, and does not appear in the other sentence.
+
+Given two sentences s1 and s2, return a list of all the uncommon words. You may return the answer in any order.
+
+class Solution:
+    def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        lst1 = s1.split()
+        lst2 = s2.split()
+        d1 = {}
+        d2 = {}
+        res = []
+        for element in lst1:
+            if element not in d1.keys():
+                d1[element] = 1
+            else:
+                d1[element] += 1
+        for element in lst2:
+            if element not in d2.keys():
+                d2[element] = 1
+            else:
+                d2[element] += 1
+        for element in d1.keys():
+            if d1[element] == 1 and element not in lst2:
+                res.append(element)
+        for element in d2.keys():
+            if d2[element] == 1 and element not in lst1:
+                res.append(element)
+        return res
