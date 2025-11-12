@@ -6139,3 +6139,17 @@ class Solution:
             if d2[element] == 1 and element not in lst1:
                 res.append(element)
         return res
+
+You are given an integer array nums.
+
+In one move, you may increase the value of any single element nums[i] by 1.
+
+Return the minimum total number of moves required so that all elements in nums become equal.
+
+class Solution:
+    def minMoves(self, nums: List[int]) -> int:
+        nums = sorted(nums)
+        res = 0
+        for i in range(len(nums) - 1):
+            res += nums[len(nums) - 1] - nums[i]
+        return res
