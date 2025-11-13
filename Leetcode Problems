@@ -6153,3 +6153,27 @@ class Solution:
         for i in range(len(nums) - 1):
             res += nums[len(nums) - 1] - nums[i]
         return res
+
+You are given an array of strings words and a string chars.
+
+A string is good if it can be formed by characters from chars (each character can only be used once for each word in words).
+
+Return the sum of lengths of all good strings in words.
+
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        lst = []
+        res = 0
+        for i in range(len(chars)):
+            lst.append(chars[i])
+        lst1 = lst.copy()
+        for element in words:
+            for i in range(len(element)):
+                if element[i] in lst1:
+                    lst1.remove(element[i])
+                else:
+                    break
+                if i == len(element) - 1:
+                    res += len(element)
+            lst1 = lst.copy()
+        return res
