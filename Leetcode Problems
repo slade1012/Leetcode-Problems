@@ -6200,3 +6200,14 @@ class Solution:
         for i in range(len(targetWord)):
             res3 += d[targetWord[i]]
         return int(res1) + int(res2) == int(res3)
+
+Given an integer n, return any array containing n unique integers such that they add up to 0.
+
+class Solution:
+    def sumZero(self, n: int) -> List[int]:
+        if n % 2 == 0:
+            lst = [i for i in range(- n // 2, n // 2 + 1)]
+            lst.remove(0)
+        else:
+            lst = [i for i in range(- (n - 1) // 2, (n - 1) // 2 + 1)]
+        return lst
