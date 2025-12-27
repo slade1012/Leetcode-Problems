@@ -6211,3 +6211,29 @@ class Solution:
         else:
             lst = [i for i in range(- (n - 1) // 2, (n - 1) // 2 + 1)]
         return lst
+
+You are given an integer array nums and an integer k.
+
+Find the absolute difference between:
+
+the sum of the k largest elements in the array; and
+the sum of the k smallest elements in the array.
+Return an integer denoting this difference.
+
+class Solution:
+    def absDifference(self, nums: List[int], k: int) -> int:
+        nums = sorted(nums)
+        return abs(sum(nums[len(nums) - k:]) - sum(nums[:k]))
+
+You are given an integer n.
+
+Define its mirror distance as: abs(n - reverse(n))​​​​​​​ where reverse(n) is the integer formed by reversing the digits of n.
+
+Return an integer denoting the mirror distance of n​​​​​​​.
+
+abs(x) denotes the absolute value of x.
+
+class Solution:
+    def mirrorDistance(self, n: int) -> int:
+        str_n = str(n)
+        return abs(n - int(str_n[::-1]))
