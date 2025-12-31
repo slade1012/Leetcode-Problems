@@ -6237,3 +6237,34 @@ class Solution:
     def mirrorDistance(self, n: int) -> int:
         str_n = str(n)
         return abs(n - int(str_n[::-1]))
+
+You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
+
+You are given a list of strings operations, where operations[i] is the ith operation you must apply to the record and is one of the following:
+
+An integer x.
+Record a new score of x.
+'+'.
+Record a new score that is the sum of the previous two scores.
+'D'.
+Record a new score that is the double of the previous score.
+'C'.
+Invalidate the previous score, removing it from the record.
+Return the sum of all the scores on the record after applying all the operations.
+
+The test cases are generated such that the answer and all intermediate calculations fit in a 32-bit integer and that all operations are valid.
+
+class Solution:
+    def calPoints(self, operations: List[str]) -> int:
+        lst = []
+        for element in operations:
+            if element == '+':
+                lst.append(lst[len(lst) - 1] + lst[len(lst) - 2])
+            elif element == 'D':
+                lst.append(2 * lst[len(lst) - 1])
+            elif element == 'C':
+                lst.remove(lst[len(lst) - 1])
+            else:
+                lst.append(int(element))
+        print(lst)
+        return sum(lst)
